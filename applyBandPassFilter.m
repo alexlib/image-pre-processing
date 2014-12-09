@@ -157,8 +157,6 @@ for k = 1 : number_of_channels
 
 end
 
-
-
 end
 
 
