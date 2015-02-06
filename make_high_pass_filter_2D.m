@@ -35,7 +35,7 @@ function FILTER = make_high_pass_filter_2D(IMAGE_HEIGHT, IMAGE_WIDTH,...
 % 
 % u is the wave number in the horizontal direction (i.e., across columns)
 % v is the wave number in the vertical direction   (i.e., across rows)
-[u, v] = meshgrid(1 : IMAGE_HEIGHT, 1 : IMAGE_WIDTH);
+[u, v] = meshgrid(1 : IMAGE_WIDTH, 1 : IMAGE_HEIGHT);
 
 % Calculate the coordinates of the zero-frequency pixels
 % in a 2-D Fourier Transform calculated by Matlab.

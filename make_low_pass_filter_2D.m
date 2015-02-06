@@ -30,29 +30,9 @@ function FILTER = make_low_pass_filter_2D(IMAGE_HEIGHT, IMAGE_WIDTH,...
 %   make_high_pass_filter_2D, make_band_pass_filter_2D, 
 %   make_band_block_filter_2D
 
-% Create an array with the same dimensions as the image
-% 
-% u is the wave number in the horizontal direction (i.e., across columns)
-% v is the wave number in the vertical direction   (i.e., across rows)
-[u, v] = meshgrid(1 : IMAGE_HEIGHT, 1 : IMAGE_WIDTH);
-
-% Calculate the coordinates of the zero-frequency pixels
-% in a 2-D Fourier Transform calculated by Matlab.
-% Matlab puts the zero-frequency pixel at (length / 2) + 1
-% for array dimensions with even numbers of elements, 
-% and at (length / 2) + 0.5 for array dimensions with
-% odd numbers of elements.
-u_zero = calculate_ft_zero_pixels(IMAGE_WIDTH);
-v_zero = calculate_ft_zero_pixels(IMAGE_HEIGHT);
-
-% Calculate the radial coordinate of the array
-r = sqrt((u - u_zero).^2 + (v - v_zero).^2);
-
-% Create an array that is one where r < CUTOFF
-% and zero where r > CUTOFF. This array is the low-pass
-% filter, which should be multiplied element-wise by the
-% FT of the image that's being filtered.
-FILTER = double(r < CUTOFF);
+% Create and invert a high-pass filter to create a low-pass filter.
+FILTER = 1 - make_high_pass_filter_2D(IMAGE_HEIGHT, IMAGE_WIDTH, ...
+    CUTOFF);
 
 end
 
