@@ -1,4 +1,21 @@
 function DEFAULT_JOB = spectral_filter_default_jobfile();
+% DEFAULT_JOB = spectral_filter_default_jobfile()
+%   This function specifies and creates a single jobfile
+%       for filtering images.
+%   
+% INPUTS: 
+%   None
+%
+% OUTPUTS: 
+%   DEFAULT_JOB = Structure containing the processing parameters of
+%       for an individual image filtering job. All the fields
+%       used in any subsequent function are specified within 
+%       this function, and are contained in DEFAULT_JOB.
+%
+% SEE ALSO:
+%   spectral_filter_job_list, run_spectral_filter_job_list
+
+% Begin function %
 
 % Cutoff wave number of the filter.
 DEFAULT_JOB.Parameters.CutoffWaveNumber_01 = 5;

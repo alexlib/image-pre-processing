@@ -1,6 +1,21 @@
 function run_spectral_filter_job_file(JOBFILE)
-% ABOUT
-%%%%%%
+% run_spectral_filter_job_file(JOBFILE)
+% This function executes a single job file for image
+% spectral filtering. Don't call this file explicitly;
+% it's called iteratively in run_spectral_filter_job_list, which
+% is the function you should be calling.
+%
+% INPUTS:
+%   JOBFILE = Structure containing the processing parameters of
+%             for an individual image filtering job.
+%
+% OUTPUTS:
+%   None
+%
+% SEE ALSO:
+%   run_spectral_filter_job_list, spectral_filter_job_list
+
+% Begin function %
 
 % Parse the jobfile.
 % Filter type
