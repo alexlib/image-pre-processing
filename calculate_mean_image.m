@@ -20,9 +20,10 @@ IMAGEOUT = zeros(imgSize);
 % Calculate the mean
 for k = 1 : nImages
     
-    fprintf(['Calculating mean image: ' num2str(k) ' of ' num2str(nImages) '\n'] );
-
+    % Construct the file name
     fileName = [IMBASE num2str(imageNum(k), nFormat) IMEXT];
+    
+    % Construct the file path
     filePath = fullfile(IMDIR, fileName);
     
     % Check existence of the file path.
