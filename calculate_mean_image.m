@@ -9,9 +9,13 @@ imageNum = STARTIMAGE : ENDIMAGE;
 % Number of images
 nImages = length(imageNum);
 
-% load first image
+% Determine the file name of the first image
 fileName = [IMBASE num2str(imageNum(1), nFormat) IMEXT];
+
+% Determine the file path of the first image
 filePath = fullfile(IMDIR, fileName);
+
+% Determine the size of the first image
 imgSize = size(imread(filePath));
 
 % Initialize sum image
