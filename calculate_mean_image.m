@@ -9,17 +9,40 @@ imageNum = STARTIMAGE : ENDIMAGE;
 % Number of images
 nImages = length(imageNum);
 
-% Determine the file name of the first image
-fileName = [IMBASE num2str(imageNum(1), nFormat) IMEXT];
+% Set a file-existence flag to zero
+exist_flag = 0;
 
-% Determine the file path of the first image
-filePath = fullfile(IMDIR, fileName);
+% Set an image counter to 1
+k = 1;
 
-% Determine the size of the first image
-imgSize = size(imread(filePath));
+% Find the first image that exists
+while exist_flag == 0
+    % Determine the file name of the first image
+    fileName = [IMBASE num2str(imageNum(k), nFormat) IMEXT];
+
+    % Determine the file path of the first image
+    filePath = fullfile(IMDIR, fileName);
+    
+    % Check existence
+    if exist(filePath, 'file')
+        % Determine the size of the first image
+        imgSize = size(imread(filePath));
+        
+        % Set the file-existence flag to one.
+        exist_flag = 1;
+    else
+        k = k + 1;
+    end
+    
+end
 
 % Initialize sum image
 IMAGEOUT = zeros(imgSize);
+
+% Start an image counter.
+% Do this because "nImages" won't accurately reflect
+% the number of images if not all the images existed.
+image_counter = 0;
 
 % Calculate the mean
 for k = 1 : nImages
@@ -32,6 +55,9 @@ for k = 1 : nImages
     
     % Check existence of the file path.
     if exist(filePath, 'file')
+        
+        % Increment the image counter
+        image_counter = image_counter + 1;
     
         % Read the image if it exists
         img = imread(filePath);
@@ -43,7 +69,7 @@ for k = 1 : nImages
 end
 
 % Divide by the number of images to take the mean.
-IMAGEOUT = IMAGEOUT ./ nImages;
+IMAGEOUT = IMAGEOUT ./ image_counter;
 
 
 end
